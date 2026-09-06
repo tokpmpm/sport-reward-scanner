@@ -45,8 +45,7 @@
     {
       "id":"corn","name":"玉米","aliases":["蒸玉米","黃金玉米","糯玉米"],"popular":false,
       "stores":{
-        "seven":[{"allCategories":true,"includeAny":["玉米"]}],
-        "family":[{"allCategories":true,"includeAny":["玉米"]}]
+        "seven":[{"category":"蒸玉米"}]
       }
     },
     {
