@@ -1,46 +1,31 @@
 (function(){
-  const data=window.SPORT_DATA, official=window.SPORT_OFFICIAL;
-  if(!data)return;
-  const normalize=s=>(s||'').toString().toLowerCase().replace(/\s+/g,'').replace(/[－—–]/g,'-');
+  const data=window.SPORT_DATA, official=window.SPORT_OFFICIAL, manual=window.SPORT_MANUAL, engine=window.SPORT_SEARCH;
+  if(!data||!engine)return;
+  const index=engine.buildIndex(data,official,manual);
   const esc=s=>String(s).replace(/[&<>\"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;'}[c]));
-  const mapped=data.products.map(p=>({...p,_type:'mapped',_search:normalize([p.name,p.category,p.barcode||'',...(p.aliases||[])].join(''))}));
-  const officialRows=[];
-  if(official){
-    Object.entries(official).forEach(([key,store])=>{
-      const meta=data.stores[key]; if(!meta)return;
-      const seen=new Set();
-      (store.categories||[]).forEach((cat,idx)=>{
-        if(store.mode==='category_rules'){
-          officialRows.push({name:cat.name,category:`${meta.name} · 官方可兌換類別`,href:`/${meta.slug}/#cat-${idx+1}`,_search:normalize([cat.name,cat.examples||'',meta.name].join(''))});
-        }else{
-          (cat.items||[]).forEach(item=>{
-            const id=key+'|'+item;
-            if(seen.has(id))return; seen.add(id);
-            officialRows.push({name:item,category:`${meta.name} · ${cat.name}`,href:`/${meta.slug}/#cat-${idx+1}`,_search:normalize([item,cat.name,meta.name].join(''))});
-          });
-        }
-      });
-      (store.bonusCategories||[]).forEach((cat,idx)=>{
-        (cat.items||[]).forEach(item=>{
-          const id=key+'|bonus|'+item;
-          if(seen.has(id))return; seen.add(id);
-          officialRows.push({name:item,category:`${meta.name} · 商品券超值加碼 · ${cat.name}`,href:`/${meta.slug}/#bonus-${idx+1}`,_search:normalize([item,cat.name,meta.name,'商品券超值加碼'].join(''))});
-        });
-      });
-    });
+  const state=new WeakMap();
+  function render(input,showAll=false){
+    const box=input.parentElement.querySelector('[data-search-results]');
+    const q=input.value.trim();
+    if(!q){box.innerHTML='';state.delete(input);return}
+    const hits=engine.search(index,q);
+    state.set(input,{q,hits});
+    const shown=showAll?hits:hits.slice(0,10);
+    const rows=shown.map(p=>`<a class="search-row" href="${p.href}"><span><b>${esc(p.name)}</b><small>${esc(p.category)}</small></span><em>${esc(p.tag||'')}</em></a>`).join('');
+    if(!hits.length){
+      box.innerHTML='<div class="search-row"><span><b>目前沒找到</b><small>這不代表不能兌換；可改用較短的品牌、商品名或查看完整通路清單。</small></span></div>';
+      return;
+    }
+    const more=!showAll&&hits.length>10?`<button class="search-more" type="button" data-search-more>查看全部 ${hits.length} 筆</button>`:'';
+    const collapse=showAll&&hits.length>10?'<button class="search-more" type="button" data-search-less>收合搜尋結果</button>':'';
+    box.innerHTML=`<div class="search-count">找到 ${hits.length} 筆 · 依相關度排序</div>${rows}${more}${collapse}`;
   }
   document.querySelectorAll('[data-product-search]').forEach(input=>{
+    input.addEventListener('input',()=>render(input,false));
     const box=input.parentElement.querySelector('[data-search-results]');
-    input.addEventListener('input',()=>{
-      const q=normalize(input.value);if(!q){box.innerHTML='';return}
-      const mappedHits=mapped.filter(p=>p._search.includes(q)).slice(0,6);
-      const used=new Set(mappedHits.map(p=>normalize(p.name)));
-      const officialHits=officialRows.filter(p=>p._search.includes(q)&&!used.has(normalize(p.name))).slice(0,10-mappedHits.length);
-      const hits=[
-        ...mappedHits.map(p=>({name:p.name,category:p.category,href:p.barcode?`/lookup/?barcode=${encodeURIComponent(p.barcode)}`:`/product/${p.id}/`,tag:p.barcode||'快速查詢'})),
-        ...officialHits.map(p=>({...p,tag:'官方清單'}))
-      ];
-      box.innerHTML=hits.length?hits.map(p=>`<a class="search-row" href="${p.href}"><span><b>${esc(p.name)}</b><small>${esc(p.category)}</small></span><em>${esc(p.tag)}</em></a>`).join(''):'<div class="search-row"><span><b>目前沒找到</b><small>不代表不能兌換，請以官方最新清單為準。</small></span></div>';
+    box.addEventListener('click',ev=>{
+      if(ev.target.closest('[data-search-more]')){ev.preventDefault();render(input,true)}
+      if(ev.target.closest('[data-search-less]')){ev.preventDefault();render(input,false);input.scrollIntoView({block:'center'})}
     });
   });
 })();
