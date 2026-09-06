@@ -16,7 +16,7 @@
       const link=document.createElement('a');
       link.className=tag.className+' store-tag-link';
       link.href=href;
-      link.setAttribute('aria-label',`查看 ${label} 可兌換商品`);
+      link.setAttribute('aria-label',`查看 ${label} 完整可兌換商品清單`);
       const text=document.createElement('span');
       text.textContent=label;
       const arrow=document.createElement('span');
@@ -30,7 +30,7 @@
     if(kicker){
       kicker.textContent='STORE CATALOGS';
       const heading=kicker.closest('.section-head')?.querySelector('h2');
-      if(heading)heading.textContent='查看各通路可換商品';
+      if(heading)heading.textContent='六大通路完整商品清單';
     }
 
     if(!document.querySelector('#store-catalog-link-style')){
