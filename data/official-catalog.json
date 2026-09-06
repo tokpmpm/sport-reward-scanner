@@ -1,1 +1,12 @@
-__OFFICIAL_JSON_PLACEHOLDER__
+{
+  "updatedAt": "2026-09-06",
+  "stores": {
+    "seven": "data/official/seven.json",
+    "family": "data/official/family.json",
+    "hilife": "data/official/hilife.json",
+    "pxmart": "data/official/pxmart.json",
+    "wanjiafu": "data/official/wanjiafu.json",
+    "lejiakang": "data/official/lejiakang.json"
+  },
+  "qaPolicy": "Build must fail if any official item/category count does not match the stored official total. Duplicate official rows are preserved."
+}
