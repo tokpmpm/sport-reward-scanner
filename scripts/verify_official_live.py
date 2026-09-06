@@ -53,11 +53,49 @@ def parse_rule_table(soup):
         if cells[0] and cells[1]: rows.append((cells[0],cells[1]))
     return rows
 
+def parse_family_categories(soup):
+    result=[]
+    for card in soup.select('details.category-card'):
+        classes=set(card.get('class') or [])
+        if 'all-items' in classes: continue
+        title_node=card.select_one('.category-title')
+        if not title_node: continue
+        title=clean(title_node.get_text(' ',strip=True))
+        m=re.match(r'^(.*?)\s+(\d+)\s*項$',title)
+        if not m: raise AssertionError(f'cannot parse Family category title: {title}')
+        name=clean(m.group(1));declared=int(m.group(2))
+        items=[clean(li.get_text(' ',strip=True)) for li in card.find_all('li')]
+        if len(items)!=declared:
+            raise AssertionError(f'Family live category count mismatch: {name} {len(items)}/{declared}')
+        result.append({'name':name,'count':declared,'items':items})
+    return result
+
+def verify_family_categories(store,soup,errors):
+    live_cards=parse_family_categories(soup)
+    local_categories=store.get('categories',[])
+    live_names=[c['name'] for c in live_cards]
+    local_names=[c['name'] for c in local_categories]
+    if live_names!=local_names:
+        live_c,local_c=Counter(live_names),Counter(local_names)
+        errors.append({'scope':'family/category-names','missing':list((live_c-local_c).elements())[:50],'extra':list((local_c-live_c).elements())[:50],'liveCount':len(live_names),'localCount':len(local_names),'orderOnly':not list((live_c-local_c).elements()) and not list((local_c-live_c).elements())})
+    reports=[]
+    local_by_name={c['name']:c for c in local_categories}
+    for live in live_cards:
+        local=local_by_name.get(live['name'])
+        if not local:
+            reports.append({'name':live['name'],'live':live['count'],'local':None,'pass':False});continue
+        local_items=[clean(x) for x in local.get('items',[])]
+        if live['count']!=local['officialCount']:
+            errors.append({'scope':f'family/{live["name"]}/declared-count','missing':[],'extra':[],'liveCount':live['count'],'localCount':local['officialCount'],'orderOnly':False})
+        compare_sequence(f'family/{live["name"]}',live['items'],local_items,errors)
+        reports.append({'name':live['name'],'live':len(live['items']),'local':len(local_items),'pass':live['items']==local_items and live['count']==local['officialCount']})
+    return reports
+
 def verify_fixed(key,store,html,errors,summary):
     soup=BeautifulSoup(html,'html.parser');category_reports=[]
-    # 7-ELEVEN and Hi-Life category accordions are stable enough to diff directly.
-    # Family's short "FMC" heading is rendered differently, so Family is verified against its official 308-item master list instead.
-    if key!='family':
+    if key=='family':
+        category_reports=verify_family_categories(store,soup,errors)
+    else:
         for cat in store.get('categories',[]):
             live=group_items(soup,cat['name'],cat['officialCount']);local=[clean(x) for x in cat.get('items',[])]
             compare_sequence(f'{key}/{cat["name"]}',live,local,errors)
@@ -70,7 +108,7 @@ def verify_fixed(key,store,html,errors,summary):
     if key=='family':
         local_all=first_unique([clean(x) for c in store['categories'] for x in c.get('items',[])])
         compare_sequence(f'{key}/all-items',live_all,local_all,errors,ignore_order=True)
-        coverage='official 308-item master list + local category counts'
+        coverage='master list + all category rows'
     else:
         local_all=[clean(x) for c in store['categories'] for x in c.get('items',[])]
         compare_sequence(f'{key}/all-items',live_all,local_all,errors)
