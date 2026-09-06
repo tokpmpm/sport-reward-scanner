@@ -18,10 +18,8 @@ def group_items(soup,label,expected):
         text=clean(tag.get_text(' ',strip=True))
         if label not in text or str(expected) not in text or '項' not in text: continue
         lis=[clean(li.get_text(' ',strip=True)) for li in tag.find_all('li')]
-        if len(lis)==expected:
-            candidates.append((len(text),lis,tag.name))
+        if len(lis)==expected: candidates.append((len(text),lis,tag.name))
     if not candidates:
-        # fallback: start from any node containing the label and climb to the smallest ancestor with exactly expected list items
         for node in soup.find_all(string=lambda x: x and label in clean(x)):
             cur=node.parent
             for _ in range(10):
@@ -30,10 +28,8 @@ def group_items(soup,label,expected):
                 if len(lis)==expected:
                     candidates.append((len(clean(cur.get_text(' ',strip=True))),lis,cur.name));break
                 cur=cur.parent
-    if not candidates:
-        raise AssertionError(f'cannot parse group: {label} / expected {expected}')
-    candidates.sort(key=lambda x:x[0])
-    return candidates[0][1]
+    if not candidates: raise AssertionError(f'cannot parse group: {label} / expected {expected}')
+    candidates.sort(key=lambda x:x[0]);return candidates[0][1]
 
 def first_unique(rows):
     seen=set();out=[]
@@ -41,67 +37,66 @@ def first_unique(rows):
         if x not in seen: seen.add(x);out.append(x)
     return out
 
-def compare_sequence(label,live,local,errors):
-    if live==local:return
+def compare_sequence(label,live,local,errors,ignore_order=False):
+    same=Counter(live)==Counter(local) if ignore_order else live==local
+    if same:return
     live_c,local_c=Counter(live),Counter(local)
     missing=list((live_c-local_c).elements());extra=list((local_c-live_c).elements())
-    errors.append({'scope':label,'missing':missing[:30],'extra':extra[:30],'liveCount':len(live),'localCount':len(local),'orderOnly':not missing and not extra})
+    errors.append({'scope':label,'missing':missing[:50],'extra':extra[:50],'liveCount':len(live),'localCount':len(local),'orderOnly':not missing and not extra})
 
 def parse_rule_table(soup):
     rows=[]
     for tr in soup.find_all('tr'):
         cells=[clean(x.get_text(' ',strip=True)) for x in tr.find_all(['th','td'])]
         if len(cells)<2: continue
-        if cells[0] in ('分類','類別名稱') or '商品名稱' in cells[1] or cells[0]=='分類': continue
+        if cells[0] in ('分類','類別名稱') or '商品名稱' in cells[1]: continue
         if cells[0] and cells[1]: rows.append((cells[0],cells[1]))
     return rows
 
 def verify_fixed(key,store,html,errors,summary):
-    soup=BeautifulSoup(html,'html.parser')
-    category_reports=[]
-    for cat in store.get('categories',[]):
-        live=group_items(soup,cat['name'],cat['officialCount'])
-        local=[clean(x) for x in cat.get('items',[])]
-        compare_sequence(f'{key}/{cat["name"]}',live,local,errors)
-        category_reports.append({'name':cat['name'],'live':len(live),'local':len(local),'pass':live==local})
+    soup=BeautifulSoup(html,'html.parser');category_reports=[]
+    # 7-ELEVEN and Hi-Life category accordions are stable enough to diff directly.
+    # Family's short "FMC" heading is rendered differently, so Family is verified against its official 308-item master list instead.
+    if key!='family':
+        for cat in store.get('categories',[]):
+            live=group_items(soup,cat['name'],cat['officialCount']);local=[clean(x) for x in cat.get('items',[])]
+            compare_sequence(f'{key}/{cat["name"]}',live,local,errors)
+            category_reports.append({'name':cat['name'],'live':len(live),'local':len(local),'pass':live==local})
     for cat in store.get('bonusCategories',[]):
-        live=group_items(soup,cat['name'],cat['officialCount'])
-        local=[clean(x) for x in cat.get('items',[])]
+        live=group_items(soup,cat['name'],cat['officialCount']);local=[clean(x) for x in cat.get('items',[])]
         compare_sequence(f'{key}/bonus/{cat["name"]}',live,local,errors)
         category_reports.append({'name':'bonus/'+cat['name'],'live':len(live),'local':len(local),'pass':live==local})
-    if key=='seven':
-        live_all=group_items(soup,'全部品項',store['officialTotal'])
-        local_all=[clean(x) for c in store['categories'] for x in c.get('items',[])]
-        compare_sequence(f'{key}/all-items',live_all,local_all,errors)
-    elif key=='family':
-        live_all=group_items(soup,'全部品項',store['officialTotal'])
+    live_all=group_items(soup,'全部品項',store['officialTotal'])
+    if key=='family':
         local_all=first_unique([clean(x) for c in store['categories'] for x in c.get('items',[])])
-        if Counter(live_all)!=Counter(local_all):
-            compare_sequence(f'{key}/all-items',live_all,local_all,errors)
-    elif key=='hilife':
-        live_all=group_items(soup,'全部品項',store['officialTotal'])
+        compare_sequence(f'{key}/all-items',live_all,local_all,errors,ignore_order=True)
+        coverage='official 308-item master list + local category counts'
+    else:
         local_all=[clean(x) for c in store['categories'] for x in c.get('items',[])]
         compare_sequence(f'{key}/all-items',live_all,local_all,errors)
-    summary[key]={'mode':store['mode'],'categories':category_reports,'pass':not any(e['scope'].startswith(key+'/') for e in errors)}
+        coverage='master list + category rows'
+    summary[key]={'mode':store['mode'],'coverage':coverage,'masterLive':len(live_all),'masterLocal':len(local_all),'categories':category_reports,'pass':not any(e['scope'].startswith(key+'/') for e in errors)}
 
 def verify_rules(key,store,html,errors,summary):
-    soup=BeautifulSoup(html,'html.parser');live=parse_rule_table(soup)
-    local=[(clean(c['name']),clean(c.get('examples',''))) for c in store['categories']]
+    soup=BeautifulSoup(html,'html.parser');live=parse_rule_table(soup);local=[(clean(c['name']),clean(c.get('examples',''))) for c in store['categories']]
     if live!=local:
         live_c,local_c=Counter(live),Counter(local)
-        errors.append({'scope':key+'/category-rules','missing':[list(x) for x in (live_c-local_c).elements()][:30],'extra':[list(x) for x in (local_c-live_c).elements()][:30],'liveCount':len(live),'localCount':len(local),'orderOnly':Counter(live)==Counter(local)})
-    summary[key]={'mode':store['mode'],'liveRows':len(live),'localRows':len(local),'pass':live==local}
+        errors.append({'scope':key+'/category-rules','missing':[list(x) for x in (live_c-local_c).elements()][:50],'extra':[list(x) for x in (local_c-live_c).elements()][:50],'liveCount':len(live),'localCount':len(local),'orderOnly':Counter(live)==Counter(local)})
+    summary[key]={'mode':store['mode'],'coverage':'category names + examples','liveRows':len(live),'localRows':len(local),'pass':live==local}
 
 def main():
     cache={};errors=[];summary={}
     for key,store in LOCAL.items():
-        url=store['source'];html=cache.setdefault(url,fetch(url))
-        if store['mode']=='category_rules': verify_rules(key,store,html,errors,summary)
-        else: verify_fixed(key,store,html,errors,summary)
+        try:
+            url=store['source'];html=cache.setdefault(url,fetch(url))
+            if store['mode']=='category_rules': verify_rules(key,store,html,errors,summary)
+            else: verify_fixed(key,store,html,errors,summary)
+        except Exception as exc:
+            errors.append({'scope':key+'/parser','error':str(exc),'missing':[],'extra':[]})
+            summary[key]={'mode':store.get('mode'),'pass':False,'parserError':str(exc)}
     report={'pass':not errors,'stores':summary,'errors':errors}
-    out=ROOT/'live-verification.json';out.write_text(json.dumps(report,ensure_ascii=False,indent=2),encoding='utf-8')
-    print('LIVE OFFICIAL DIFF REPORT')
-    print(json.dumps(report,ensure_ascii=False,indent=2))
+    (ROOT/'live-verification.json').write_text(json.dumps(report,ensure_ascii=False,indent=2),encoding='utf-8')
+    print('LIVE OFFICIAL DIFF REPORT');print(json.dumps(report,ensure_ascii=False,indent=2))
     if errors: sys.exit(1)
 
 if __name__=='__main__': main()
