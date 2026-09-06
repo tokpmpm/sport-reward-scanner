@@ -1,0 +1,106 @@
+{
+  "updatedAt": "2026-09-06",
+  "groups": [
+    {"id":"hot-food","label":"現做熱食","items":["tea-egg","onsen-egg","sweet-potato","potato","corn"]},
+    {"id":"coffee","label":"現調咖啡","items":["americano","latte","milk-latte","specialty-coffee"]},
+    {"id":"tea","label":"現萃茶飲","items":["fresh-tea"]},
+    {"id":"fruit","label":"水果","items":["banana","fruit"]}
+  ],
+  "lookups": [
+    {
+      "id":"tea-egg","name":"茶葉蛋","aliases":["滷蛋","茶葉蛋50g"],"popular":true,
+      "stores":{
+        "seven":[{"category":"茶葉蛋/黃金滷蛋/水煮蛋"}],
+        "family":[{"category":"茶葉蛋"}],
+        "hilife":[{"category":"蛋類","includeAny":["茶葉蛋"]}],
+        "wanjiafu":[{"category":"蛋類"}],
+        "lejiakang":[{"category":"蛋類"}]
+      }
+    },
+    {
+      "id":"onsen-egg","name":"溫泉蛋／水煮蛋","aliases":["溏心蛋","半熟蛋","水煮蛋"],"popular":false,
+      "stores":{
+        "seven":[{"category":"冷藏熟食蛋","includeAny":["溫泉蛋","半熟蛋","水煮蛋"]},{"category":"茶葉蛋/黃金滷蛋/水煮蛋","includeAny":["水煮蛋"]}],
+        "family":[{"category":"健康志向","includeAny":["溫泉蛋"]}],
+        "hilife":[{"category":"蛋類","includeAny":["溫泉蛋","溏心"]}],
+        "wanjiafu":[{"category":"蛋類"}],
+        "lejiakang":[{"category":"蛋類"}]
+      }
+    },
+    {
+      "id":"sweet-potato","name":"地瓜／烤地瓜","aliases":["番薯","夯番薯","冰烤地瓜"],"popular":true,
+      "stores":{
+        "seven":[{"category":"現蒸烤地瓜/馬鈴薯","includeAny":["地瓜"]}],
+        "family":[{"category":"地瓜"}],
+        "hilife":[{"category":"地瓜"}]
+      }
+    },
+    {
+      "id":"potato","name":"馬鈴薯","aliases":["夯馬鈴薯","貝比馬鈴薯"],"popular":false,
+      "stores":{
+        "seven":[{"category":"現蒸烤地瓜/馬鈴薯","includeAny":["馬鈴薯"]}],
+        "family":[{"category":"馬鈴薯"}]
+      }
+    },
+    {
+      "id":"corn","name":"玉米","aliases":["蒸玉米","黃金玉米","糯玉米"],"popular":false,
+      "stores":{
+        "seven":[{"allCategories":true,"includeAny":["玉米"]}],
+        "family":[{"allCategories":true,"includeAny":["玉米"]}]
+      }
+    },
+    {
+      "id":"banana","name":"香蕉","aliases":["蕉"],"popular":true,
+      "stores":{
+        "seven":[{"category":"香蕉"}],
+        "family":[{"category":"水果","includeAny":["香蕉"]},{"category":"健康志向","includeAny":["香蕉","山採蕉"]}]
+      }
+    },
+    {
+      "id":"fruit","name":"切片水果／水果盒","aliases":["水果切片","水果盒","截切水果"],"popular":false,
+      "stores":{
+        "seven":[{"category":"切片水果"}],
+        "family":[{"category":"水果","excludeAny":["香蕉"]}],
+        "wanjiafu":[{"category":"水果"}],
+        "lejiakang":[{"category":"水果"}]
+      }
+    },
+    {
+      "id":"americano","name":"美式咖啡","aliases":["黑咖啡","美式"],"popular":true,
+      "stores":{
+        "seven":[{"category":"美式"},{"category":"濃萃美式"},{"category":"特選美式"},{"category":"精品咖啡","includeAny":["美式","熱美","冰美"]}],
+        "family":[{"category":"Let's Café","includeAny":["美式"]}],
+        "wanjiafu":[{"category":"無糖咖啡"}],
+        "lejiakang":[{"category":"無糖咖啡"}]
+      }
+    },
+    {
+      "id":"latte","name":"拿鐵","aliases":["咖啡拿鐵"],"popular":true,
+      "stores":{
+        "seven":[{"category":"拿鐵"},{"category":"濃萃拿鐵"},{"category":"特選拿鐵"},{"category":"精品咖啡","includeAny":["拿鐵","熱拿","冰拿"]}],
+        "family":[{"category":"Let's Café","includeAny":["拿鐵"]}]
+      }
+    },
+    {
+      "id":"milk-latte","name":"厚乳／厚奶拿鐵","aliases":["厚乳拿鐵","厚奶拿鐵"],"popular":false,
+      "stores":{
+        "seven":[{"category":"厚乳拿鐵"},{"category":"精品咖啡","includeAny":["厚拿鐵"]}],
+        "family":[{"category":"Let's Café","includeAny":["厚奶拿鐵"]}]
+      }
+    },
+    {
+      "id":"specialty-coffee","name":"精品／單品咖啡","aliases":["精品咖啡","單品咖啡"],"popular":false,
+      "stores":{
+        "seven":[{"category":"精品咖啡"}],
+        "family":[{"category":"Let's Café","includeAny":["單品"]}]
+      }
+    },
+    {
+      "id":"fresh-tea","name":"現萃無糖茶／純茶","aliases":["現萃茶","純茶","Lets Tea"],"popular":true,
+      "stores":{
+        "seven":[{"category":"現萃茶/不可思議茶bar(純茶)"}],
+        "family":[{"category":"Let's Tea","excludeAny":["奶茶","醇奶茶"]}]
+      }
+    }
+  ]
+}
