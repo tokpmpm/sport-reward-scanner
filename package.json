@@ -1,0 +1,9 @@
+{
+  "name": "sport-reward-scanner",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build": "python3 scripts/build.py",
+    "serve": "python3 -m http.server 4173 -d public"
+  }
+}
