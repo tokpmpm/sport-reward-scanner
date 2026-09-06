@@ -1,4 +1,48 @@
 (function(){
+  const storeRoutes={
+    '7-11':'/7-eleven/',
+    '全家':'/familymart/',
+    '萊爾富':'/hilife/',
+    '全聯':'/pxmart/',
+    '萬家福':'/wanjiafu/',
+    '樂家康':'/lejiakang/'
+  };
+
+  function initStoreCatalogLinks(){
+    document.querySelectorAll('.store-line .store-tag').forEach(tag=>{
+      const label=tag.textContent.trim();
+      const href=storeRoutes[label];
+      if(!href||tag.tagName==='A')return;
+      const link=document.createElement('a');
+      link.className=tag.className+' store-tag-link';
+      link.href=href;
+      link.setAttribute('aria-label',`查看 ${label} 可兌換商品`);
+      const text=document.createElement('span');
+      text.textContent=label;
+      const arrow=document.createElement('span');
+      arrow.setAttribute('aria-hidden','true');
+      arrow.textContent='→';
+      link.append(text,arrow);
+      tag.replaceWith(link);
+    });
+
+    const kicker=[...document.querySelectorAll('.section-kicker')].find(el=>el.textContent.trim()==='6 STORES');
+    if(kicker){
+      kicker.textContent='STORE CATALOGS';
+      const heading=kicker.closest('.section-head')?.querySelector('h2');
+      if(heading)heading.textContent='查看各通路可換商品';
+    }
+
+    if(!document.querySelector('#store-catalog-link-style')){
+      const style=document.createElement('style');
+      style.id='store-catalog-link-style';
+      style.textContent='.store-tag-link{text-decoration:none;display:inline-flex;align-items:center;gap:5px;transition:background .12s ease,transform .12s ease}.store-tag-link:hover,.store-tag-link:focus-visible{background:var(--green);outline:2px solid var(--line);outline-offset:2px}.store-tag-link:active{transform:translate(1px,1px)}';
+      document.head.appendChild(style);
+    }
+  }
+
+  initStoreCatalogLinks();
+
   const data=window.SPORT_DATA, official=window.SPORT_OFFICIAL, manual=window.SPORT_MANUAL, engine=window.SPORT_SEARCH;
   if(!data||!engine)return;
   const index=engine.buildIndex(data,official,manual);
