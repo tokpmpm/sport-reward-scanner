@@ -1,31 +1,336 @@
 {
   "updatedAt": "2026-09-06",
   "stores": {
-    "seven": {"name":"7-ELEVEN","short":"7-11","slug":"7-eleven","source":"https://500.gov.tw/registrant/intro/vendor-2.html"},
-    "family": {"name":"全家","short":"全家","slug":"familymart","source":"https://500.gov.tw/registrant/intro/vendor-1.html"},
-    "hilife": {"name":"萊爾富","short":"萊爾富","slug":"hilife","source":"https://500.gov.tw/registrant/intro/vendor-3.html"},
-    "pxmart": {"name":"全聯","short":"全聯","slug":"pxmart","source":"https://500.gov.tw/registrant/intro/vendor-5.html"},
-    "wanjiafu": {"name":"萬家福","short":"萬家福","slug":"wanjiafu","source":"https://500.gov.tw/registrant/intro/vendor-7.html"},
-    "lejiakang": {"name":"樂家康","short":"樂家康","slug":"lejiakang","source":"https://500.gov.tw/registrant/intro/vendor-7.html"}
+    "seven": {
+      "name": "7-ELEVEN",
+      "short": "7-11",
+      "slug": "7-eleven",
+      "source": "https://500.gov.tw/registrant/intro/vendor-2.html"
+    },
+    "family": {
+      "name": "全家",
+      "short": "全家",
+      "slug": "familymart",
+      "source": "https://500.gov.tw/registrant/intro/vendor-1.html"
+    },
+    "hilife": {
+      "name": "萊爾富",
+      "short": "萊爾富",
+      "slug": "hilife",
+      "source": "https://500.gov.tw/registrant/intro/vendor-3.html"
+    },
+    "pxmart": {
+      "name": "全聯",
+      "short": "全聯",
+      "slug": "pxmart",
+      "source": "https://500.gov.tw/registrant/intro/vendor-5.html"
+    },
+    "wanjiafu": {
+      "name": "萬家福",
+      "short": "萬家福",
+      "slug": "wanjiafu",
+      "source": "https://500.gov.tw/registrant/intro/vendor-7.html"
+    },
+    "lejiakang": {
+      "name": "樂家康",
+      "short": "樂家康",
+      "slug": "lejiakang",
+      "source": "https://500.gov.tw/registrant/intro/vendor-7.html"
+    }
+  },
+  "officialCatalogQA": {
+    "seven": {
+      "sourceTotal": 473,
+      "verifiedCategories": {
+        "切片水果": {
+          "sourceCount": 25,
+          "storedCount": 25
+        },
+        "茶葉蛋/黃金滷蛋/水煮蛋": {
+          "sourceCount": 6,
+          "storedCount": 6
+        }
+      }
+    }
   },
   "products": [
-    {"id":"pocari-580","barcode":"4716426880619","name":"寶礦力水得 580ml","category":"運動飲料","aliases":["寶礦力","pocari"],"stores":{"seven":{"status":"exact","items":["寶礦力水得PET580"]},"family":{"status":"exact","items":["寶礦力水得 580ml"]},"hilife":{"status":"exact","items":["寶礦力水得PET580"]},"pxmart":{"status":"category","items":["運動飲料"]},"wanjiafu":{"status":"category","items":["運動飲料"]},"lejiakang":{"status":"category","items":["運動飲料"]}}},
-    {"id":"supau-590","barcode":"4710421090059","name":"舒跑運動飲料 590ml","category":"運動飲料","aliases":["舒跑"],"stores":{"seven":{"status":"exact","items":["舒跑運動飲料PET590"]},"family":{"status":"exact","items":["舒跑運動飲料 590ml"]},"hilife":{"status":"exact","items":["舒跑PET590"]},"pxmart":{"status":"category","items":["運動飲料"]},"wanjiafu":{"status":"category","items":["運動飲料"]},"lejiakang":{"status":"category","items":["運動飲料"]}}},
-    {"id":"fin-580","barcode":"4710154012861","name":"黑松 FIN 補給飲料 580ml","category":"運動飲料","aliases":["FIN","黑松FIN"],"stores":{"seven":{"status":"exact","items":["黑松FIN補給飲料PET580"]},"family":{"status":"exact","items":["黑松FIN補給飲料 580ml"]},"hilife":{"status":"exact","items":["黑松FIN補給飲料PET580"]},"pxmart":{"status":"category","items":["運動飲料"]},"wanjiafu":{"status":"category","items":["運動飲料"]},"lejiakang":{"status":"category","items":["運動飲料"]}}},
-    {"id":"soy-highfiber","barcode":"4710088435767","name":"統一陽光無加糖高纖豆漿 400ml","category":"豆漿／五穀飲","aliases":["無糖豆漿","高纖豆漿"],"stores":{"seven":{"status":"exact","items":["統一陽光無加糖高纖豆漿400ml"]},"family":{"status":"exact","items":["統一陽光無加糖高纖豆漿400ml"]},"hilife":{"status":"exact","items":["統一無加糖高纖豆漿400ml"]},"pxmart":{"status":"category","items":["豆漿／穀物飲"]},"wanjiafu":{"status":"category","items":["豆漿"]},"lejiakang":{"status":"category","items":["豆漿"]}}},
-    {"id":"soy-golden","barcode":"4710088432742","name":"統一陽光黃金豆豆漿 400ml","category":"豆漿／五穀飲","aliases":["黃金豆豆漿","豆漿"],"stores":{"seven":{"status":"exact","items":["統一陽光黃金豆豆漿400ml"]},"family":{"status":"exact","items":["統一陽光黃金豆豆漿400ml"]},"hilife":{"status":"exact","items":["統一黃金豆豆漿400ml"]},"pxmart":{"status":"category","items":["豆漿／穀物飲"]},"wanjiafu":{"status":"category","items":["豆漿"]},"lejiakang":{"status":"category","items":["豆漿"]}}},
-    {"id":"black-soy","barcode":"4710105037080","name":"光泉無加糖黑豆漿 400ml","category":"豆漿／五穀飲","aliases":["黑豆漿","光泉豆漿"],"stores":{"seven":{"status":"exact","items":["光泉無加糖黑豆漿400ml"]},"family":{"status":"exact","items":["光泉無加糖黑豆漿400ml"]},"hilife":{"status":"exact","items":["光泉無加糖黑豆漿400ml"]},"pxmart":{"status":"category","items":["豆漿／穀物飲"]},"wanjiafu":{"status":"category","items":["豆漿"]},"lejiakang":{"status":"category","items":["豆漿"]}}},
-    {"id":"uni-water","barcode":"4710088636850","name":"UNI water 純水 550ml","category":"瓶裝水","aliases":["UNI water","統一純水"],"stores":{"seven":{"status":"exact","items":["統一UNI water純水PET550"]},"family":{"status":"exact","items":["UNI water純水550ml"]},"hilife":{"status":"unknown","items":[]},"pxmart":{"status":"unknown","items":[]},"wanjiafu":{"status":"category","items":["瓶裝水"]},"lejiakang":{"status":"category","items":["瓶裝水"]}}},
-    {"id":"milk-lowfat-290","barcode":"4710105024714","name":"光泉低脂鮮乳 290ml","category":"冷藏鮮乳","aliases":["光泉鮮乳","低脂鮮乳"],"stores":{"seven":{"status":"unknown","items":[]},"family":{"status":"exact","items":["光泉低脂鮮乳290ml"]},"hilife":{"status":"exact","items":["光泉低脂鮮乳290ml"]},"pxmart":{"status":"category","items":["冷藏鮮乳"]},"wanjiafu":{"status":"category","items":["鮮乳"]},"lejiakang":{"status":"category","items":["鮮乳"]}}},
-    {"id":"yogurt-ab","barcode":"4710088824509","name":"統一 AB+ 無加糖優格 200g","category":"無糖優格","aliases":["AB優格","無糖優格"],"stores":{"seven":{"status":"unknown","items":[]},"family":{"status":"unknown","items":[]},"hilife":{"status":"exact","items":["統一AB+無加糖優格200g"]},"pxmart":{"status":"category","items":["無糖優格"]},"wanjiafu":{"status":"category","items":["優格"]},"lejiakang":{"status":"category","items":["優格"]}}},
-    {"id":"tea-king","barcode":"4710088630223","name":"茶裏王日式無糖綠茶 600ml","category":"無糖茶","aliases":["茶裏王","無糖綠茶"],"stores":{"seven":{"status":"exact","items":["茶裏王日式綠茶PET600"]},"family":{"status":"unknown","items":[]},"hilife":{"status":"unknown","items":[]},"pxmart":{"status":"unknown","items":[]},"wanjiafu":{"status":"category","items":["無糖茶"]},"lejiakang":{"status":"category","items":["無糖茶"]}}},
-    {"id":"gensui-green","barcode":"4710018152702","name":"原萃日式綠茶 580ml","category":"無糖茶","aliases":["原萃","日式綠茶"],"stores":{"seven":{"status":"exact","items":["原萃日式綠茶PET580"]},"family":{"status":"exact","items":["原萃日式綠茶580ml"]},"hilife":{"status":"unknown","items":[]},"pxmart":{"status":"unknown","items":[]},"wanjiafu":{"status":"category","items":["無糖茶"]},"lejiakang":{"status":"category","items":["無糖茶"]}}},
-    {"id":"tea-garden","barcode":"4710421071577","name":"御茶園特撰日式綠茶 590ml","category":"無糖茶","aliases":["御茶園","日式綠茶"],"stores":{"seven":{"status":"exact","items":["御茶園特撰日式綠茶PET590"]},"family":{"status":"exact","items":["御茶園特撰日式綠茶590ml"]},"hilife":{"status":"unknown","items":[]},"pxmart":{"status":"unknown","items":[]},"wanjiafu":{"status":"category","items":["無糖茶"]},"lejiakang":{"status":"category","items":["無糖茶"]}}},
-    {"id":"tea-egg","barcode":null,"name":"茶葉蛋","category":"現做／熟食蛋","aliases":["滷蛋","茶葉蛋50g","黃金滷蛋","水煮蛋","所長經典茶葉蛋"],"quick":true,"stores":{"seven":{"status":"exact","items":["茶葉蛋","黃金滷蛋(站)","黃金滷蛋","黃金水煮蛋","所長經典茶葉蛋"]},"family":{"status":"exact","items":["茶葉蛋"]},"hilife":{"status":"exact","items":["茶葉蛋50g"]},"pxmart":{"status":"unknown","items":[]},"wanjiafu":{"status":"category","items":["蛋類／茶葉蛋"]},"lejiakang":{"status":"category","items":["蛋類／茶葉蛋"]}},"note":"7-ELEVEN 官方「茶葉蛋／黃金滷蛋／水煮蛋」分類明列一般茶葉蛋等品項；不同門市供應仍可能不同。"},
-    {"id":"sweet-potato","barcode":null,"name":"地瓜／烤地瓜","category":"現做地瓜","aliases":["番薯","夯番薯","烤番薯","冰烤番薯","現蒸地瓜"],"quick":true,"stores":{"seven":{"status":"exact","items":["現蒸地瓜／烤地瓜（依官方價位品項）"]},"family":{"status":"exact","items":["夯番薯","冰烤番薯"]},"hilife":{"status":"exact","items":["地瓜"]},"pxmart":{"status":"unknown","items":[]},"wanjiafu":{"status":"unknown","items":[]},"lejiakang":{"status":"unknown","items":[]}}},
-    {"id":"onsen-egg","barcode":null,"name":"溫泉蛋／溏心蛋","category":"熟食蛋","aliases":["溫泉蛋","溏心蛋","水煮蛋"],"quick":true,"stores":{"seven":{"status":"exact","items":["黃金水煮蛋等熟食蛋品項"]},"family":{"status":"exact","items":["溫泉蛋／溏心蛋類品項"]},"hilife":{"status":"exact","items":["溫泉蛋／熟食蛋品項"]},"pxmart":{"status":"unknown","items":[]},"wanjiafu":{"status":"category","items":["蛋類"]},"lejiakang":{"status":"category","items":["蛋類"]}}},
-    {"id":"fruit","barcode":null,"name":"水果／切片水果","category":"水果","aliases":["香蕉","芭樂","蘋果","水果切片","水果盒"],"quick":true,"stores":{"seven":{"status":"exact","items":["切片水果／水果盒（依官方清單）"]},"family":{"status":"exact","items":["香蕉／綜合水果等（依官方清單）"]},"hilife":{"status":"unknown","items":[]},"pxmart":{"status":"unknown","items":[]},"wanjiafu":{"status":"category","items":["水果"]},"lejiakang":{"status":"category","items":["水果"]}}},
-    {"id":"americano","barcode":null,"name":"美式咖啡／黑咖啡","category":"現煮／無糖咖啡","aliases":["咖啡","美式","黑咖啡","Lets Cafe","CITY CAFE"],"quick":true,"stores":{"seven":{"status":"exact","items":["CITY CAFE 美式咖啡指定品項"]},"family":{"status":"exact","items":["Let's Café 美式咖啡指定品項"]},"hilife":{"status":"unknown","items":[]},"pxmart":{"status":"unknown","items":[]},"wanjiafu":{"status":"category","items":["無糖咖啡"]},"lejiakang":{"status":"category","items":["無糖咖啡"]}}},
-    {"id":"fresh-tea","barcode":null,"name":"現萃無糖茶","category":"現萃茶","aliases":["純茶","現萃茶","無糖茶","Lets Tea"],"quick":true,"stores":{"seven":{"status":"exact","items":["現萃純茶指定品項"]},"family":{"status":"exact","items":["Let's Tea 純茶指定品項"]},"hilife":{"status":"unknown","items":[]},"pxmart":{"status":"unknown","items":[]},"wanjiafu":{"status":"category","items":["無糖茶"]},"lejiakang":{"status":"category","items":["無糖茶"]}}}
+    {
+      "id": "pocari-580",
+      "barcode": "4716426880619",
+      "name": "寶礦力水得 580ml",
+      "category": "運動飲料",
+      "aliases": ["寶礦力", "pocari"],
+      "stores": {
+        "seven": {"status": "exact", "items": ["寶礦力水得PET580"]},
+        "family": {"status": "exact", "items": ["寶礦力水得 580ml"]},
+        "hilife": {"status": "exact", "items": ["寶礦力水得PET580"]},
+        "pxmart": {"status": "category", "items": ["運動飲料"]},
+        "wanjiafu": {"status": "category", "items": ["運動飲料"]},
+        "lejiakang": {"status": "category", "items": ["運動飲料"]}
+      }
+    },
+    {
+      "id": "supau-590",
+      "barcode": "4710421090059",
+      "name": "舒跑運動飲料 590ml",
+      "category": "運動飲料",
+      "aliases": ["舒跑"],
+      "stores": {
+        "seven": {"status": "exact", "items": ["舒跑運動飲料PET590"]},
+        "family": {"status": "exact", "items": ["舒跑運動飲料 590ml"]},
+        "hilife": {"status": "exact", "items": ["舒跑PET590"]},
+        "pxmart": {"status": "category", "items": ["運動飲料"]},
+        "wanjiafu": {"status": "category", "items": ["運動飲料"]},
+        "lejiakang": {"status": "category", "items": ["運動飲料"]}
+      }
+    },
+    {
+      "id": "fin-580",
+      "barcode": "4710154012861",
+      "name": "黑松 FIN 補給飲料 580ml",
+      "category": "運動飲料",
+      "aliases": ["FIN", "黑松FIN"],
+      "stores": {
+        "seven": {"status": "exact", "items": ["黑松FIN補給飲料PET580"]},
+        "family": {"status": "exact", "items": ["黑松FIN補給飲料 580ml"]},
+        "hilife": {"status": "exact", "items": ["黑松FIN補給飲料PET580"]},
+        "pxmart": {"status": "category", "items": ["運動飲料"]},
+        "wanjiafu": {"status": "category", "items": ["運動飲料"]},
+        "lejiakang": {"status": "category", "items": ["運動飲料"]}
+      }
+    },
+    {
+      "id": "soy-highfiber",
+      "barcode": "4710088435767",
+      "name": "統一陽光無加糖高纖豆漿 400ml",
+      "category": "豆漿／五穀飲",
+      "aliases": ["無糖豆漿", "高纖豆漿"],
+      "stores": {
+        "seven": {"status": "exact", "items": ["統一陽光無加糖高纖豆漿400ml"]},
+        "family": {"status": "exact", "items": ["統一陽光無加糖高纖豆漿400ml"]},
+        "hilife": {"status": "exact", "items": ["統一無加糖高纖豆漿400ml"]},
+        "pxmart": {"status": "category", "items": ["豆漿／穀物飲"]},
+        "wanjiafu": {"status": "category", "items": ["豆漿"]},
+        "lejiakang": {"status": "category", "items": ["豆漿"]}
+      }
+    },
+    {
+      "id": "soy-golden",
+      "barcode": "4710088432742",
+      "name": "統一陽光黃金豆豆漿 400ml",
+      "category": "豆漿／五穀飲",
+      "aliases": ["黃金豆豆漿", "豆漿"],
+      "stores": {
+        "seven": {"status": "exact", "items": ["統一陽光黃金豆豆漿400ml"]},
+        "family": {"status": "exact", "items": ["統一陽光黃金豆豆漿400ml"]},
+        "hilife": {"status": "exact", "items": ["統一黃金豆豆漿400ml"]},
+        "pxmart": {"status": "category", "items": ["豆漿／穀物飲"]},
+        "wanjiafu": {"status": "category", "items": ["豆漿"]},
+        "lejiakang": {"status": "category", "items": ["豆漿"]}
+      }
+    },
+    {
+      "id": "black-soy",
+      "barcode": "4710105037080",
+      "name": "光泉無加糖黑豆漿 400ml",
+      "category": "豆漿／五穀飲",
+      "aliases": ["黑豆漿", "光泉豆漿"],
+      "stores": {
+        "seven": {"status": "exact", "items": ["光泉無加糖黑豆漿400ml"]},
+        "family": {"status": "exact", "items": ["光泉無加糖黑豆漿400ml"]},
+        "hilife": {"status": "exact", "items": ["光泉無加糖黑豆漿400ml"]},
+        "pxmart": {"status": "category", "items": ["豆漿／穀物飲"]},
+        "wanjiafu": {"status": "category", "items": ["豆漿"]},
+        "lejiakang": {"status": "category", "items": ["豆漿"]}
+      }
+    },
+    {
+      "id": "uni-water",
+      "barcode": "4710088636850",
+      "name": "UNI water 純水 550ml",
+      "category": "瓶裝水",
+      "aliases": ["UNI water", "統一純水"],
+      "stores": {
+        "seven": {"status": "exact", "items": ["統一UNI water純水PET550"]},
+        "family": {"status": "exact", "items": ["UNI water純水550ml"]},
+        "hilife": {"status": "unknown", "items": []},
+        "pxmart": {"status": "unknown", "items": []},
+        "wanjiafu": {"status": "category", "items": ["瓶裝水"]},
+        "lejiakang": {"status": "category", "items": ["瓶裝水"]}
+      }
+    },
+    {
+      "id": "milk-lowfat-290",
+      "barcode": "4710105024714",
+      "name": "光泉低脂鮮乳 290ml",
+      "category": "冷藏鮮乳",
+      "aliases": ["光泉鮮乳", "低脂鮮乳"],
+      "stores": {
+        "seven": {"status": "unknown", "items": []},
+        "family": {"status": "exact", "items": ["光泉低脂鮮乳290ml"]},
+        "hilife": {"status": "exact", "items": ["光泉低脂鮮乳290ml"]},
+        "pxmart": {"status": "category", "items": ["冷藏鮮乳"]},
+        "wanjiafu": {"status": "category", "items": ["鮮乳"]},
+        "lejiakang": {"status": "category", "items": ["鮮乳"]}
+      }
+    },
+    {
+      "id": "yogurt-ab",
+      "barcode": "4710088824509",
+      "name": "統一 AB+ 無加糖優格 200g",
+      "category": "無糖優格",
+      "aliases": ["AB優格", "無糖優格"],
+      "stores": {
+        "seven": {"status": "unknown", "items": []},
+        "family": {"status": "unknown", "items": []},
+        "hilife": {"status": "exact", "items": ["統一AB+無加糖優格200g"]},
+        "pxmart": {"status": "category", "items": ["無糖優格"]},
+        "wanjiafu": {"status": "category", "items": ["優格"]},
+        "lejiakang": {"status": "category", "items": ["優格"]}
+      }
+    },
+    {
+      "id": "tea-king",
+      "barcode": "4710088630223",
+      "name": "茶裏王日式無糖綠茶 600ml",
+      "category": "無糖茶",
+      "aliases": ["茶裏王", "無糖綠茶"],
+      "stores": {
+        "seven": {"status": "exact", "items": ["茶裏王日式綠茶PET600"]},
+        "family": {"status": "unknown", "items": []},
+        "hilife": {"status": "unknown", "items": []},
+        "pxmart": {"status": "unknown", "items": []},
+        "wanjiafu": {"status": "category", "items": ["無糖茶"]},
+        "lejiakang": {"status": "category", "items": ["無糖茶"]}
+      }
+    },
+    {
+      "id": "gensui-green",
+      "barcode": "4710018152702",
+      "name": "原萃日式綠茶 580ml",
+      "category": "無糖茶",
+      "aliases": ["原萃", "日式綠茶"],
+      "stores": {
+        "seven": {"status": "exact", "items": ["原萃日式綠茶PET580"]},
+        "family": {"status": "exact", "items": ["原萃日式綠茶580ml"]},
+        "hilife": {"status": "unknown", "items": []},
+        "pxmart": {"status": "unknown", "items": []},
+        "wanjiafu": {"status": "category", "items": ["無糖茶"]},
+        "lejiakang": {"status": "category", "items": ["無糖茶"]}
+      }
+    },
+    {
+      "id": "tea-garden",
+      "barcode": "4710421071577",
+      "name": "御茶園特撰日式綠茶 590ml",
+      "category": "無糖茶",
+      "aliases": ["御茶園", "日式綠茶"],
+      "stores": {
+        "seven": {"status": "exact", "items": ["御茶園特撰日式綠茶PET590"]},
+        "family": {"status": "exact", "items": ["御茶園特撰日式綠茶590ml"]},
+        "hilife": {"status": "unknown", "items": []},
+        "pxmart": {"status": "unknown", "items": []},
+        "wanjiafu": {"status": "category", "items": ["無糖茶"]},
+        "lejiakang": {"status": "category", "items": ["無糖茶"]}
+      }
+    },
+    {
+      "id": "tea-egg",
+      "barcode": null,
+      "name": "茶葉蛋",
+      "category": "現做／熟食蛋",
+      "aliases": ["滷蛋", "茶葉蛋50g", "黃金滷蛋", "水煮蛋", "所長經典茶葉蛋"],
+      "quick": true,
+      "stores": {
+        "seven": {"status": "exact", "items": ["茶葉蛋", "黃金滷蛋(站)", "黃金滷蛋", "黃金水煮蛋", "黃金水煮蛋", "所長經典茶葉蛋"]},
+        "family": {"status": "exact", "items": ["茶葉蛋"]},
+        "hilife": {"status": "exact", "items": ["茶葉蛋50g"]},
+        "pxmart": {"status": "unknown", "items": []},
+        "wanjiafu": {"status": "category", "items": ["蛋類／茶葉蛋"]},
+        "lejiakang": {"status": "category", "items": ["蛋類／茶葉蛋"]}
+      },
+      "note": "7-ELEVEN 官方「茶葉蛋／黃金滷蛋／水煮蛋」分類共 6 項；本站依官方順序原樣保存，同名品項不自行去重。"
+    },
+    {
+      "id": "sweet-potato",
+      "barcode": null,
+      "name": "地瓜／烤地瓜",
+      "category": "現做地瓜",
+      "aliases": ["番薯", "夯番薯", "烤番薯", "冰烤番薯", "現蒸地瓜"],
+      "quick": true,
+      "stores": {
+        "seven": {"status": "exact", "items": ["現蒸地瓜／烤地瓜（依官方價位品項）"]},
+        "family": {"status": "exact", "items": ["夯番薯", "冰烤番薯"]},
+        "hilife": {"status": "exact", "items": ["地瓜"]},
+        "pxmart": {"status": "unknown", "items": []},
+        "wanjiafu": {"status": "unknown", "items": []},
+        "lejiakang": {"status": "unknown", "items": []}
+      }
+    },
+    {
+      "id": "onsen-egg",
+      "barcode": null,
+      "name": "溫泉蛋／溏心蛋",
+      "category": "熟食蛋",
+      "aliases": ["溫泉蛋", "溏心蛋", "水煮蛋"],
+      "quick": true,
+      "stores": {
+        "seven": {"status": "exact", "items": ["黃金水煮蛋等熟食蛋品項"]},
+        "family": {"status": "exact", "items": ["溫泉蛋／溏心蛋類品項"]},
+        "hilife": {"status": "exact", "items": ["溫泉蛋／熟食蛋品項"]},
+        "pxmart": {"status": "unknown", "items": []},
+        "wanjiafu": {"status": "category", "items": ["蛋類"]},
+        "lejiakang": {"status": "category", "items": ["蛋類"]}
+      }
+    },
+    {
+      "id": "fruit",
+      "barcode": null,
+      "name": "水果／切片水果",
+      "category": "水果",
+      "aliases": ["香蕉", "芭樂", "蘋果", "水果切片", "水果盒"],
+      "quick": true,
+      "stores": {
+        "seven": {"status": "exact", "items": ["芭樂切片", "繽紛綜合水果餐盒", "蘋果切片", "OPEN-富士蘋果袋", "OPEN-芭樂切片", "橘肉洋香瓜切片", "紐西蘭黃金奇異果切片", "西瓜鑽石杯", "鳳梨切片分享盒", "紐西蘭星空蘋果切片", "OPEN-紐西蘭富士蘋果袋", "鳳梨鮮削杯400g", "鮮果繽紛杯", "紐西蘭愛妃蘋果切片", "金煌芒果切片", "紐西蘭Diva女神蘋果切片", "紐西蘭雙色奇異果切片", "紐西蘭黃金奇異果切片200g", "紅肉火龍果切片", "繽紛水果拼盤", "夏日芒果切片", "牛奶鳳梨切片", "紅肉火龍果切片分享盒", "白肉火龍果切片", "OPEN-水梨袋"]},
+        "family": {"status": "exact", "items": ["香蕉／綜合水果等（依官方清單）"]},
+        "hilife": {"status": "unknown", "items": []},
+        "pxmart": {"status": "unknown", "items": []},
+        "wanjiafu": {"status": "category", "items": ["水果"]},
+        "lejiakang": {"status": "category", "items": ["水果"]}
+      },
+      "note": "7-ELEVEN 官方「切片水果」分類共 25 項，本站已完整保存。"
+    },
+    {
+      "id": "americano",
+      "barcode": null,
+      "name": "美式咖啡／黑咖啡",
+      "category": "現煮／無糖咖啡",
+      "aliases": ["咖啡", "美式", "黑咖啡", "Lets Cafe", "CITY CAFE"],
+      "quick": true,
+      "stores": {
+        "seven": {"status": "exact", "items": ["CITY CAFE 美式咖啡指定品項"]},
+        "family": {"status": "exact", "items": ["Let's Café 美式咖啡指定品項"]},
+        "hilife": {"status": "unknown", "items": []},
+        "pxmart": {"status": "unknown", "items": []},
+        "wanjiafu": {"status": "category", "items": ["無糖咖啡"]},
+        "lejiakang": {"status": "category", "items": ["無糖咖啡"]}
+      }
+    },
+    {
+      "id": "fresh-tea",
+      "barcode": null,
+      "name": "現萃無糖茶",
+      "category": "現萃茶",
+      "aliases": ["純茶", "現萃茶", "無糖茶", "Lets Tea"],
+      "quick": true,
+      "stores": {
+        "seven": {"status": "exact", "items": ["現萃純茶指定品項"]},
+        "family": {"status": "exact", "items": ["Let's Tea 純茶指定品項"]},
+        "hilife": {"status": "unknown", "items": []},
+        "pxmart": {"status": "unknown", "items": []},
+        "wanjiafu": {"status": "category", "items": ["無糖茶"]},
+        "lejiakang": {"status": "category", "items": ["無糖茶"]}
+      }
+    }
   ]
 }
