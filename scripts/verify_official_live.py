@@ -1,4 +1,4 @@
-import json, pathlib, re, sys, urllib.request
+import json, pathlib, re, sys, urllib.request, unicodedata
 from collections import Counter
 from bs4 import BeautifulSoup
 
@@ -8,6 +8,7 @@ LOCAL={k:json.loads((ROOT/rel).read_text(encoding='utf-8')) for k,rel in MANIFES
 
 
 def clean(s): return re.sub(r'\s+',' ',str(s or '')).strip()
+def canon_label(s): return unicodedata.normalize('NFKC',clean(s))
 def fetch(url):
     req=urllib.request.Request(url,headers={'User-Agent':'Mozilla/5.0 SportRewardScannerQA/1.0','Accept-Language':'zh-TW,zh;q=0.9'})
     with urllib.request.urlopen(req,timeout=30) as r: return r.read().decode('utf-8','replace')
@@ -71,24 +72,23 @@ def parse_family_categories(soup):
     return result
 
 def verify_family_categories(store,soup,errors):
-    live_cards=parse_family_categories(soup)
-    local_categories=store.get('categories',[])
-    live_names=[c['name'] for c in live_cards]
-    local_names=[c['name'] for c in local_categories]
+    live_cards=parse_family_categories(soup);local_categories=store.get('categories',[])
+    live_names=[canon_label(c['name']) for c in live_cards];local_names=[canon_label(c['name']) for c in local_categories]
     if live_names!=local_names:
         live_c,local_c=Counter(live_names),Counter(local_names)
-        errors.append({'scope':'family/category-names','missing':list((live_c-local_c).elements())[:50],'extra':list((local_c-live_c).elements())[:50],'liveCount':len(live_names),'localCount':len(local_names),'orderOnly':not list((live_c-local_c).elements()) and not list((local_c-live_c).elements())})
-    reports=[]
-    local_by_name={c['name']:c for c in local_categories}
+        missing=list((live_c-local_c).elements());extra=list((local_c-live_c).elements())
+        errors.append({'scope':'family/category-names','missing':missing[:50],'extra':extra[:50],'liveCount':len(live_names),'localCount':len(local_names),'orderOnly':not missing and not extra})
+    reports=[];local_by_name={canon_label(c['name']):c for c in local_categories}
     for live in live_cards:
-        local=local_by_name.get(live['name'])
+        local=local_by_name.get(canon_label(live['name']))
         if not local:
             reports.append({'name':live['name'],'live':live['count'],'local':None,'pass':False});continue
         local_items=[clean(x) for x in local.get('items',[])]
         if live['count']!=local['officialCount']:
             errors.append({'scope':f'family/{live["name"]}/declared-count','missing':[],'extra':[],'liveCount':live['count'],'localCount':local['officialCount'],'orderOnly':False})
+        # Item names stay exact: no Unicode normalization here.
         compare_sequence(f'family/{live["name"]}',live['items'],local_items,errors)
-        reports.append({'name':live['name'],'live':len(live['items']),'local':len(local_items),'pass':live['items']==local_items and live['count']==local['officialCount']})
+        reports.append({'name':live['name'],'localName':local['name'],'labelNFKCEquivalent':canon_label(live['name'])==canon_label(local['name']),'live':len(live['items']),'local':len(local_items),'pass':live['items']==local_items and live['count']==local['officialCount']})
     return reports
 
 def verify_fixed(key,store,html,errors,summary):
