@@ -53,7 +53,9 @@
       "id":"banana","name":"香蕉","aliases":["蕉"],"popular":true,
       "stores":{
         "seven":[{"category":"香蕉"}],
-        "family":[{"category":"水果","includeAny":["香蕉"]},{"category":"健康志向","includeAny":["香蕉","山採蕉"]}]
+        "family":[{"category":"水果","includeAny":["香蕉"]},{"category":"健康志向","includeAny":["香蕉","山採蕉"]}],
+        "wanjiafu":[{"category":"水果"}],
+        "lejiakang":[{"category":"水果"}]
       }
     },
     {
