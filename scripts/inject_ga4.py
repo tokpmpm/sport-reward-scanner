@@ -1,5 +1,6 @@
 import pathlib
 
+# Runs after static generation so every generated HTML page receives the same GA4 tag.
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 PUB = ROOT / 'public'
 MEASUREMENT_ID = 'G-VZ2E4RJMB7'
