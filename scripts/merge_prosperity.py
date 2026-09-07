@@ -31,7 +31,6 @@ def merge_product_page(path):
     w_block = text[w[0]:w[1]]
     eligible = ('status yes' in w_block) or ('status category' in w_block)
 
-    # Rename the first shared result and remove the duplicate second result.
     text = text[:w[0]] + w_block.replace('<h3>萬家福</h3>', '<h3>萬家福／樂家康</h3>') + text[w[1]:]
     l = find_store_block(text, '樂家康')
     if l:
@@ -48,7 +47,7 @@ def merge_product_page(path):
     path.write_text(text, encoding='utf-8')
 
 
-# Runtime store metadata: treat 萬家福／樂家康 as one shared channel.
+# Runtime metadata: 萬家福／樂家康 share one activity catalog.
 data_path = PUB / 'assets' / 'data.js'
 raw = data_path.read_text(encoding='utf-8')
 prefix = 'window.SPORT_DATA='
@@ -76,7 +75,7 @@ home = chip_pattern.sub(
 )
 home_path.write_text(home, encoding='utf-8')
 
-# Manual product pages: collapse the two identical result rows into one.
+# Manual product pages: collapse the duplicate result rows.
 for p in (PUB / 'product').glob('*/index.html'):
     merge_product_page(p)
 
@@ -87,16 +86,18 @@ if wan_path.exists():
     text = text.replace('萬家福', '萬家福／樂家康')
     wan_path.write_text(text, encoding='utf-8')
 
-# Keep old /lejiakang/ links working, but make them a redirect rather than a duplicate catalog.
+# Keep old /lejiakang/ links working, but make them a noindex redirect.
 lej_dir = PUB / 'lejiakang'
 lej_dir.mkdir(parents=True, exist_ok=True)
 (lej_dir / 'index.html').write_text('''<!doctype html><html lang="zh-Hant"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,follow"><link rel="canonical" href="https://sport.meshthings.com/wanjiafu/"><meta http-equiv="refresh" content="0;url=/wanjiafu/"><title>萬家福／樂家康｜揮汗有禮</title></head><body><p>萬家福與樂家康共用同一份活動商品清單，正在前往<a href="/wanjiafu/">萬家福／樂家康</a>。</p></body></html>''', encoding='utf-8')
 
-# Replace duplicated footer links everywhere.
+# Replace duplicated footer links everywhere. Also remove any leftover old single link.
 for p in PUB.rglob('*.html'):
     text = p.read_text(encoding='utf-8')
     text = text.replace('<a href="/wanjiafu/">萬家福</a><a href="/lejiakang/">樂家康</a>',
                         '<a href="/wanjiafu/">萬家福／樂家康</a>')
+    if p != (lej_dir / 'index.html'):
+        text = text.replace('<a href="/lejiakang/">樂家康</a>', '')
     p.write_text(text, encoding='utf-8')
 
 # The duplicate route is not indexable and should not appear in sitemap.
@@ -112,6 +113,9 @@ assert data['stores']['wanjiafu']['name'] == '萬家福／樂家康'
 assert '<span>樂家康</span>' not in home_path.read_text(encoding='utf-8')
 assert '/lejiakang/</loc>' not in sitemap.read_text(encoding='utf-8')
 for p in (PUB / 'product').glob('*/index.html'):
-    assert '<h3>樂家康</h3>' not in p.read_text(encoding='utf-8')
+    text = p.read_text(encoding='utf-8')
+    assert '<h3>樂家康</h3>' not in text
+    assert '<a href="/lejiakang/">樂家康</a>' not in text
+assert '<a href="/lejiakang/">樂家康</a>' not in wan_path.read_text(encoding='utf-8')
 
 print('CHANNEL MERGE PASSED: 萬家福／樂家康 displayed as one shared channel')
