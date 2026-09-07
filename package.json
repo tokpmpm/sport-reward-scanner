@@ -3,7 +3,7 @@
   "version": "2.0.0",
   "private": true,
   "scripts": {
-    "build": "python3 scripts/build_v2.py && python3 scripts/merge_prosperity.py && node scripts/test_search.js",
+    "build": "python3 scripts/build_v2.py && python3 scripts/merge_prosperity.py && python3 scripts/inject_ga4.py && node scripts/test_search.js",
     "verify:live": "python3 scripts/verify_official_live.py",
     "test:search": "node scripts/test_search.js",
     "serve": "python3 -m http.server 4173 -d public"
