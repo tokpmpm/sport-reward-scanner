@@ -5,10 +5,21 @@
   const cards=[...section.querySelectorAll('[data-recommendation-card]')];
   const empty=section.querySelector('[data-recommendation-empty]');
   let viewed=false;
+  const viewedItems=new Set();
 
   function track(name,params){
     if(typeof window.sportTrack==='function')window.sportTrack(name,params||{});
     else if(typeof window.gtag==='function')window.gtag('event',name,params||{});
+  }
+
+  function itemParams(card){
+    return {
+      recommendation_id:card.dataset.id||'',
+      store_name:card.dataset.storeName||'',
+      product_name:card.dataset.title||'',
+      extra_pay:Number(card.dataset.extra||0),
+      has_photo:card.dataset.hasPhoto==='1'
+    };
   }
 
   function applyFilter(value){
@@ -34,27 +45,35 @@
     if(!link)return;
     const card=link.closest('[data-recommendation-card]');
     if(!card)return;
-    track('recommendation_click',{
-      recommendation_id:card.dataset.id||'',
-      store_name:card.dataset.storeName||'',
-      product_name:card.dataset.title||'',
-      extra_pay:Number(card.dataset.extra||0),
-      link_url:link.href
-    });
+    track('recommendation_click',{...itemParams(card),link_url:link.href});
   });
 
   if('IntersectionObserver' in window){
-    const observer=new IntersectionObserver(entries=>{
+    const sectionObserver=new IntersectionObserver(entries=>{
       if(viewed)return;
       if(entries.some(x=>x.isIntersecting)){
         viewed=true;
         track('recommendation_view',{item_count:cards.length});
-        observer.disconnect();
+        sectionObserver.disconnect();
       }
     },{threshold:.2});
-    observer.observe(section);
+    sectionObserver.observe(section);
+
+    const itemObserver=new IntersectionObserver(entries=>{
+      entries.forEach(entry=>{
+        if(!entry.isIntersecting)return;
+        const card=entry.target;
+        const id=card.dataset.id||'';
+        if(!id||viewedItems.has(id))return;
+        viewedItems.add(id);
+        track('recommendation_item_view',itemParams(card));
+        itemObserver.unobserve(card);
+      });
+    },{threshold:.5});
+    cards.forEach(card=>itemObserver.observe(card));
   }else{
     viewed=true;
     track('recommendation_view',{item_count:cards.length});
+    cards.forEach(card=>track('recommendation_item_view',itemParams(card)));
   }
 })();
