@@ -25,6 +25,8 @@ for item in DATA['items']:
         errors.append(f"extra mismatch: {item['id']} ({total}-{allowance}!={extra})")
     if extra < 0:
         errors.append(f"negative extra: {item['id']}")
+    if item.get('image') and not item.get('imageAlt'):
+        errors.append(f"missing imageAlt: {item['id']}")
 
 if errors:
     raise SystemExit('RECOMMENDATION QA FAILED:\n- ' + '\n- '.join(errors))
@@ -57,10 +59,19 @@ for item in items:
     extra_label = '0 元' if extra == 0 else f'+{extra} 元'
     extra_class = ' zero' if extra == 0 else ''
     lines = ''.join(f'<div>・{e(line)}</div>' for line in item['lines'])
+    if item.get('image'):
+        media = (
+            f'<figure class="recommendation-photo">'
+            f'<img src="{e(item["image"])}" alt="{e(item["imageAlt"])}" '
+            f'width="500" height="667" loading="lazy" decoding="async">'
+            f'</figure>'
+        )
+    else:
+        media = f'<div class="recommendation-emoji" aria-hidden="true">{e(item["emoji"])}</div>'
     cards.append(
-        f'''<article class="recommendation-card" data-recommendation-card data-id="{e(item['id'])}" data-store="{e(item['storeKey'])}" data-store-name="{e(item['store'])}" data-title="{e(item['title'])}" data-extra="{extra}">
+        f'''<article class="recommendation-card" data-recommendation-card data-id="{e(item['id'])}" data-store="{e(item['storeKey'])}" data-store-name="{e(item['store'])}" data-title="{e(item['title'])}" data-extra="{extra}" data-has-photo="{'1' if item.get('image') else '0'}">
 <div class="recommendation-top"><span class="recommendation-store">{e(item['store'])}</span><span class="recommendation-extra{extra_class}"><strong>{extra_label}</strong><br>{'剛好折完' if extra == 0 else '補差額'}</span></div>
-<div class="recommendation-emoji" aria-hidden="true">{e(item['emoji'])}</div>
+{media}
 <h3>{e(item['title'])}</h3>
 <div class="recommendation-lines">{lines}</div>
 <div class="recommendation-money"><span>可折額度<b>{int(item['allowance'])} 元</b></span><span>商品總額<b>{int(item['total'])} 元</b></span></div>
