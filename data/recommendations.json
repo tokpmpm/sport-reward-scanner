@@ -1,3 +1,107 @@
 {
-  "updatedAt": "2026-09-09"
+  "updatedAt": "2026-09-09",
+  "allowances": [
+    {"store":"7-ELEVEN","amount":55,"note":"基本 50 元＋通路加碼 5 元"},
+    {"store":"全家","amount":55,"note":"基本 50 元＋通路加碼 5 元"},
+    {"store":"萊爾富","amount":60,"note":"基本 50 元＋通路加碼 10 元"},
+    {"store":"全聯","amount":50,"note":"50 元"},
+    {"store":"萬家福／樂家康","amount":50,"note":"50 元"}
+  ],
+  "items": [
+    {
+      "id":"seven-latte",
+      "store":"7-ELEVEN",
+      "storeKey":"seven",
+      "emoji":"☕",
+      "title":"CITY CAFE 大杯拿鐵（冰／熱）",
+      "lines":["大杯拿鐵 × 1"],
+      "allowance":55,
+      "total":55,
+      "extra":0,
+      "link":"/product/latte/",
+      "linkLabel":"查看拿鐵可兌換品項"
+    },
+    {
+      "id":"hilife-tea-eggs-7",
+      "store":"萊爾富",
+      "storeKey":"hilife",
+      "emoji":"🥚",
+      "title":"茶葉蛋 7 顆",
+      "lines":["茶葉蛋 × 7"],
+      "allowance":60,
+      "total":63,
+      "extra":3,
+      "link":"/product/tea-egg/",
+      "linkLabel":"查看茶葉蛋可兌換品項"
+    },
+    {
+      "id":"prosperity-yogurt-soymilk",
+      "store":"萬家福／樂家康",
+      "storeKey":"prosperity",
+      "emoji":"🍼",
+      "title":"優酪乳＋豆漿組合",
+      "lines":["福樂自然零優酪乳 小瓶 × 2","大醇豆豆漿 × 1"],
+      "allowance":50,
+      "total":59,
+      "extra":9,
+      "link":"/wanjiafu/",
+      "linkLabel":"查看通路可兌換類別"
+    },
+    {
+      "id":"pxmart-eggs-10",
+      "store":"全聯",
+      "storeKey":"pxmart",
+      "emoji":"🥚",
+      "title":"洗選蛋 10 顆",
+      "lines":["洗選蛋 1 盒（10 顆）"],
+      "allowance":50,
+      "total":60,
+      "extra":10,
+      "link":"/pxmart/",
+      "linkLabel":"查看全聯可兌換類別"
+    },
+    {
+      "id":"hilife-small-farm-milk",
+      "store":"萊爾富",
+      "storeKey":"hilife",
+      "emoji":"🐄",
+      "title":"小農晶品鮮乳 935ml",
+      "lines":["小農晶品鮮乳 935ml × 1"],
+      "allowance":60,
+      "total":75,
+      "extra":15,
+      "image":"/assets/recommendations/small-farm-milk.webp",
+      "imageAlt":"萊爾富小農晶品鮮乳實拍",
+      "link":"/hilife/",
+      "linkLabel":"查看萊爾富完整清單"
+    },
+    {
+      "id":"prosperity-large-yogurt",
+      "store":"萬家福／樂家康",
+      "storeKey":"prosperity",
+      "emoji":"🥛",
+      "title":"福樂自然零無糖優酪乳（大瓶）",
+      "lines":["福樂自然零無糖優酪乳 大瓶 × 1"],
+      "allowance":50,
+      "total":65,
+      "extra":15,
+      "link":"/wanjiafu/",
+      "linkLabel":"查看通路可兌換類別"
+    },
+    {
+      "id":"hilife-chaopure-milk",
+      "store":"萊爾富",
+      "storeKey":"hilife",
+      "emoji":"🥛",
+      "title":"朝純鮮乳 936ml",
+      "lines":["朝純鮮乳 936ml × 1","網友回報門市特價 85 元"],
+      "allowance":60,
+      "total":85,
+      "extra":25,
+      "image":"/assets/recommendations/chaopure-milk-v2.webp",
+      "imageAlt":"萊爾富朝純鮮乳 936ml 特價 85 元實拍",
+      "link":"/hilife/",
+      "linkLabel":"查看萊爾富完整清單"
+    }
+  ]
 }
