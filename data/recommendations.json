@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-08",
+  "updatedAt": "2026-09-09",
   "allowances": [
     {"store":"7-ELEVEN","amount":55,"note":"基本 50 元＋通路加碼 5 元"},
     {"store":"全家","amount":55,"note":"基本 50 元＋通路加碼 5 元"},
@@ -98,7 +98,7 @@
       "allowance":60,
       "total":85,
       "extra":25,
-      "image":"/assets/recommendations/chaopure-milk.webp",
+      "image":"/assets/recommendations/chaopure-milk-fixed.webp",
       "imageAlt":"萊爾富朝純鮮乳 936ml 特價 85 元實拍",
       "link":"/hilife/",
       "linkLabel":"查看萊爾富完整清單"
